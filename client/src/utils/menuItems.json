@@ -1,0 +1,32 @@
+[
+    {
+      "label": "Home",
+      "icon": "home",
+      "link": "/"
+    },
+    {
+      "label": "Collections",
+      "icon": "collections",
+      "link": "/collections"
+    },
+    {
+      "label": "Men",
+      "icon": "men",
+      "link": "/men"
+    },
+    {
+      "label": "Women",
+      "icon": "women",
+      "link": "/women"
+    },
+    {
+        "label": "Kids",
+        "icon": "kids",
+        "link": "/kids"
+    },
+    {
+      "label": "Contact",
+      "icon": "contact",
+      "link": "/contact"
+    }
+  ]
