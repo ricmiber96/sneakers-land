@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "name": "Nike",
+        "imagePath": "src/assets/icons/nike.svg"
+    },
+    {
+        "id": 2,
+        "name": "Adidas",
+        "imagePath": "src/assets/icons/adidas.svg"
+    },
+    {
+        "id": 3,
+        "name": "Reebok",
+        "imagePath": "src/assets/icons/reebok.svg"
+    },
+    {
+        "id": 4,
+        "name": "Converse",
+        "imagePath": "src/assets/icons/converse.svg"
+    },
+    {
+        "id": 5,
+        "name": "Puma",
+        "imagePath": "src/assets/icons/puma.svg"
+    },
+    {
+        "id": 6,
+        "name": "Vans",
+        "imagePath": "src/assets/icons/vans.svg"
+    }
+]

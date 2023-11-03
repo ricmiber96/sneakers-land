@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 export default function HomeProductsSection (props) {
   return (
-    <section className='bg-gray-100 flex flex-col items-center mt-20'>
+    <section className='bg-gray-100 flex flex-col items-center mt-28'>
       <div className='lg:px-0 xl:px-3 lg:mx-20 xl:mx-28 2xl:mx-36 3xl:mx-auto max-w-3xl mx-auto lg:max-w-7xl lg:pb-16 lg:mt-7'>
         <h2 className='font-bold text-2xl sm:text-4xl text-center w-full mx-auto py-6 mb-6'>Products</h2>
         <div className='max-w-7xl mx-auto px-4'>

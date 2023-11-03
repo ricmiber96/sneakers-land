@@ -6,7 +6,7 @@ export default function Layout ({ children }) {
   return (
     <>
       <Header/>
-      <main className='w-full min-h-screen relative overflow-hidden '>{children}</main>
+      <main className='w-full min-h-screen relative overflow-hidden mt-16'>{children}</main>
       <Footer/>
     </>
   )

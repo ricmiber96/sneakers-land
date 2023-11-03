@@ -1,10 +1,5 @@
 [
     {
-      "label": "Home",
-      "icon": "home",
-      "link": "/"
-    },
-    {
       "label": "Collections",
       "icon": "collections",
       "link": "/collections"
