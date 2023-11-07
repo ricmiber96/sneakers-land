@@ -440,6 +440,14 @@ export const AllProducts = [
     size: ['sm', 'm', 'l', 'xl'],
     price: 185.00,
     discountPrice: 125.00
+  }, {
+    id: 21,
+    company: 'adidas',
+    title: 'ultra boost 20 galaxy solar red',
+    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed modi quaerat accusantium temporibus eaque autem minus, hic est! Exercitationem, blanditi.',
+    img: [
+      'https://images.unsplash.com/photo-1580902394836-21e0d429b7f4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format'
+    ]
   }
   // 'https://images.unsplash.com/photo-1603808033192-082d6919d3e1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1015&q=80',
   // 'https://images.unsplash.com/photo-1603808033176-9d134e6f2c74?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1015&q=80',

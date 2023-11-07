@@ -1,6 +1,6 @@
 import React from 'react'
 import { AllProducts as products } from '../../utils/data.js'
-import ProductItem from './ProductItem.jsx'
+import ProductItem from '../products/ProductItem.jsx'
 import { Link } from 'react-router-dom'
 
 export default function HomeProductsSection (props) {
