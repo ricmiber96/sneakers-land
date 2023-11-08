@@ -12,16 +12,21 @@
     {
       "label": "Women",
       "icon": "women",
-      "link": "/women"
+      "link": "/products/women"
     },
     {
         "label": "Kids",
         "icon": "kids",
-        "link": "/kids"
+        "link": "/products/kids"
     },
     {
       "label": "Contact",
       "icon": "contact",
       "link": "/contact"
+    },
+    {
+      "label": "About Us",
+      "icon": "about",
+      "link": "/about"
     }
   ]

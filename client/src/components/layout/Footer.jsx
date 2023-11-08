@@ -6,8 +6,8 @@ import iconImg from '../../assets/img/icon.png'
 export default function Footer (props) {
   return (
     <footer className='text-white bg-gray-700 w-full'>
-      <div className='py-12 max-w-xl mx-auto lg:max-w-7xl flex flex-col md:flex-row justify-center lg:justify-between items-center md:items-start"'>
-        <div className='my-10'>
+      <div className='py-6 max-w-xl mx-auto lg:max-w-7xl flex flex-col md:flex-row justify-center lg:justify-between items-center md:items-start"'>
+        <div className='my-6'>
           <div>
             <Link to='/' className='cursor-pointer' aria-label='homepage'>
               <img src={iconImg} alt='' className='w-32'/>
@@ -29,7 +29,7 @@ export default function Footer (props) {
           </div>
         </div>
         <nav className='flex flex-col'>
-          <ul className='grid grid-cols-2 grid-rows-3 gap-2'>
+          <ul className='grid grid-cols-2 grid-rows-3 gap-3'>
             {
               items.map((item, index) => {
                 return (
