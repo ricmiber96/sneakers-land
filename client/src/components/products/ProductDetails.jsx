@@ -1,10 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { AllProducts as product } from '../../utils/data'
 import { ShoppingCartIcon, FavouriteIcon } from '../Icons'
+import { CartContext } from '../../context/CartContext'
 
 export default function ProductDetails (props) {
   const { id } = useParams()
+  const { dispatch } = useContext(CartContext)
+
+  const addToCart = (item) => {
+    dispatch({ type: 'ADD_TO_CART', payload: item })
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -46,7 +52,9 @@ export default function ProductDetails (props) {
                       <button className='bg-gray-400 hover:opacity-60 cursor-pointer w-1/4 h-14 rounded-lg px-6 text-shadow-2xl text-white text-xl flex items-center gap-4 justify-center border shadow-md'>
                         <FavouriteIcon/>
                       </button>
-                      <button className='bg-green-400 hover:opacity-60 cursor-pointer w-2/3 h-14 rounded-lg px-6 text-shadow-2xl text-white text-xl flex items-center gap-4 justify-center border shadow-md'>
+                      <button
+                        onClick = {() => addToCart(item)}
+                        className='bg-green-400 hover:opacity-60 cursor-pointer w-2/3 h-14 rounded-lg px-6 text-shadow-2xl text-white text-xl flex items-center gap-4 justify-center border shadow-md'>
                         <ShoppingCartIcon/>
                         Add to cart
                       </button>
