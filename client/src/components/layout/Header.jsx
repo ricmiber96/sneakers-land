@@ -5,11 +5,13 @@ import items from '../../utils/menuItems.json'
 import { ShoppingCartIcon } from '../Icons'
 import Cart from './Cart'
 import { CartContext } from '../../context/CartContext'
+import useCart from '../../hooks/useCart'
 
 export default function Header (props) {
   const [selectedItem, setSelectedItem] = useState('Home')
   const [isOpen, setIsOpen] = useState(false)
-  const { state } = useContext(CartContext)
+  const { cart } = useCart()
+  const productsQuantity = cart.reduce((acc, item) => acc + item.quantity, 0)
 
   const handleItemSelected = (item) => {
     setSelectedItem(item)
@@ -44,7 +46,7 @@ export default function Header (props) {
                 <div className='mx-3 relative'>
                   <div className='absolute -top-2'>
                     <div className='z-10 px-2 absolute rounded-full text-sm text-white -right-1/3 lg:-right-2/3 -top-3 bg-green-400'>
-                      {state.items.length}
+                      {productsQuantity || 0 }
                     </div>
 
                     <button className={`${isOpen ? 'text-black' : 'text-gray-400'}`} onClick={() => setIsOpen(!isOpen)}>

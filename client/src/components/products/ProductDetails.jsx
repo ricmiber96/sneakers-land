@@ -2,15 +2,11 @@ import React, { useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { AllProducts as product } from '../../utils/data'
 import { ShoppingCartIcon, FavouriteIcon } from '../Icons'
-import { CartContext } from '../../context/CartContext'
+import useCart from '../../hooks/useCart'
 
 export default function ProductDetails (props) {
   const { id } = useParams()
-  const { dispatch } = useContext(CartContext)
-
-  const addToCart = (item) => {
-    dispatch({ type: 'ADD_TO_CART', payload: item })
-  }
+  const { addToCart } = useCart()
 
   useEffect(() => {
     window.scrollTo(0, 0)

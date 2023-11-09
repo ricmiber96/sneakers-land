@@ -1,10 +1,12 @@
 import React, { useContext } from 'react'
 import { motion } from 'framer-motion'
 import { CartContext } from '../../context/CartContext'
+import useCart from '../../hooks/useCart'
+import { TrashIcon } from '../Icons'
 
 export default function Cart ({ isOpen }) {
-  const { state, dispatch } = useContext(CartContext)
-  console.log(state)
+  const { cart, totalPay, removeFromCart } = useCart()
+  console.log(cart)
 
   const variants = {
     open: { opacity: 1, x: 0 },
@@ -21,7 +23,7 @@ export default function Cart ({ isOpen }) {
 
   return (
     <motion.div
-      className='absolute top-28  bottom-40 inset-x-2 lg:left-auto xl:right-24 lg:-mr-2 p-5 max-w-xl lg:max-w-sm lg:w-full mx-auto min-h-xs h-fit flex flex-col bg-white z-20 shadow-xl rounded-lg'
+      className={`${isOpen ? 'absolute' : 'hidden'} top-28  bottom-40 inset-x-2 lg:left-auto xl:right-24 lg:-mr-2 p-5 max-w-xl lg:max-w-sm lg:w-full mx-auto min-h-xs h-fit flex flex-col bg-white z-20 shadow-xl rounded-lg overflow-w-hidden `}
       initial={{ opacity: 0 }}
       variants={variants}
       animate={isOpen ? 'open' : 'closed' }>
@@ -29,57 +31,72 @@ export default function Cart ({ isOpen }) {
         <h3 className='font-bold pb-5 text-lg'>Cart</h3>
         <hr className='text-grayish-blue -mx-5' />
       </div>
-      <motion.ul
-        variants={{
-          open: {
-            clipPath: 'inset(0% 0% 0% 0% round 10px)',
-            transition: {
-              type: 'spring',
-              bounce: 0,
-              duration: 0.8,
-              delayChildren: 0.3,
-              staggerChildren: 0.05
-            }
-          },
-          closed: {
-            clipPath: 'inset(10% 50% 90% 50% round 10px)',
-            transition: {
-              type: 'spring',
-              bounce: 0,
-              duration: 0.3
-            }
-          }
-        }}
-        style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
-      >
-        {
-          state.items.map((item) => {
-            return (
-              <motion.li variants={itemVariants} key={item.id}>
-                <div className='flex flex-col items-center justify-between mb-6'>
-                  <div className='flex flex-row items-center gap-x-2'>
+      {
+        cart.length > 0
+          ? <>
+            <motion.ul
+              className='flex flex-col flex-1 items-center justify-start pt-4 mb-6'
+              variants={{
+                open: {
+                  clipPath: 'inset(0% 0% 0% 0% round 10px)',
+                  transition: {
+                    type: 'spring',
+                    bounce: 0,
+                    duration: 0.8,
+                    delayChildren: 0.3,
+                    staggerChildren: 0.05
+                  }
+                },
+                closed: {
+                  clipPath: 'inset(10% 50% 90% 50% round 10px)',
+                  transition: {
+                    type: 'spring',
+                    bounce: 0,
+                    duration: 0.3
+                  }
+                }
+              }}
+              style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
+            >
+
+              {cart.map((item) => {
+                return (
+                  <motion.li
+                    className='w-full flex items-center justify-between pb-4'
+                    variants={itemVariants} key={item.id}>
                     <img className='w-14 h-14 rounded-md object-cover object-bottom' src={item.img[0]} alt={item.alt}/>
-                    <div className='flex flex-col text-left'>
-                      <p className='text-md font-bold text-black capitalize'>{item.title}</p>
-                      <p className='font-bold text-md'>{item.discountPrice}$</p>
+                    <div className='px-4 flex-1'>
+                      <div className='flex justify-between'>
+                        <p className='text-md font-bold text-black capitalize'>{item.title}</p>
+                        <button onClick={() => removeFromCart(item.id)}>
+                          <TrashIcon/>
+                        </button>
+                      </div>
+                      <div className='flex justify-between mt-2'>
+                        <p className='text-md font-bold text-gray-400 capitalize'>{item.discountPrice}$ X {item.quantity}</p>
+                        <p className='font-bold text-md'>{parseInt(item.discountPrice) * parseInt(item.quantity)}$</p>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </motion.li>
-            )
-          })
-        }
-        <div>
-          <hr className='text-grayish-blue -mx-5' />
-          <div className='flex flex-row items-center justify-between mt-6'>
-            <p className='font-bold text-md'>Total</p>
-            <p className='font-bold text-md'>{state.items.length}</p>
-          </div>
-          <button className='bg-green-400 hover:opacity-60 cursor-pointer w-full h-14 rounded-lg px-6 text-shadow-2xl text-white text-xl flex items-center gap-4 justify-center border shadow-md mt-6'>
-            Checkout
-          </button>
-        </div>
-      </motion.ul>
+                  </motion.li>
+                )
+              })
+              }
+
+            </motion.ul>
+            <div>
+              <hr className='text-grayish-blue -mx-5' />
+              <div className='flex flex-row items-center justify-between mt-6'>
+                <p className='font-bold text-md'>Total</p>
+                <p className='font-bold text-md'>{totalPay}$</p>
+              </div>
+              <button className='bg-green-400 hover:opacity-60 cursor-pointer w-full h-14 rounded-lg px-6 text-shadow-2xl text-white text-xl flex items-center gap-4 justify-center border shadow-md mt-6'>
+              Checkout
+              </button>
+            </div>
+          </>
+          : <p className='text-center text-gray-400'>Your cart is empty</p>
+
+      }
     </motion.div>
   )
 }

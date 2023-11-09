@@ -1,4 +1,4 @@
-export const initialState = JSON.parse(window.localStorage.getItem('cart')) || {
+export const cartInitialState = JSON.parse(window.localStorage.getItem('cart')) || {
   items: [],
   totalPay: 0
 }
@@ -7,13 +7,9 @@ const updateLocalStorage = (state) => {
   window.localStorage.setItem('cart', JSON.stringify(state))
 }
 
-const cartReducer = (state, action) => {
+export const cartReducer = (state, action) => {
   const { type, payload } = action
   const products = state.items
-  let newState = {
-    ...state,
-    items: products
-  }
 
   const CART_ACTION_TYPES = {
     ADD_TO_CART: 'ADD_TO_CART',
@@ -23,33 +19,37 @@ const cartReducer = (state, action) => {
 
   switch (type) {
   case CART_ACTION_TYPES.ADD_TO_CART:{
-    const isProductInCart = products.find(item => item.id === payload.id)
+    const isProductInCart = products.some(item => item.id === payload.id)
     if (isProductInCart) {
       // Update quantity of product in cart
       const productIndexInCart = products.findIndex(item => item.id === payload.id)
-      newState = structuredClone(state)
+      const newState = structuredClone(state)
       newState.items[productIndexInCart].quantity += 1
       newState.totalPay = newState.totalPay + newState.items[productIndexInCart].discountPrice
+      updateLocalStorage(newState)
       return newState
     } else {
       // Add new product to cart
       const newItem = { ...payload, quantity: 1 }
-      newState = {
+      const newState = {
         ...state,
         items: [...state.items, newItem],
-        totalPay: state.totalPay += payload.discountPrice
+        totalPay: state.totalPay + payload.discountPrice
       }
-      products.push(payload)
+      updateLocalStorage(newState)
+      return newState
     }
-    console.log(newState)
+  }
+  case CART_ACTION_TYPES.REMOVE_FROM_CART:{
+    console.log(payload)
+    const newState = structuredClone(state)
+    const productIndexInCart = products.findIndex(item => item.id === payload)
+    newState.totalPay = newState.totalPay - newState.items[productIndexInCart].discountPrice * newState.items[productIndexInCart].quantity
+    newState.items = newState.items.filter(item => item.id !== payload)
+
     updateLocalStorage(newState)
     return newState
   }
-  case CART_ACTION_TYPES.REMOVE_FROM_CART:
-    return {
-      ...state,
-      items: state.items.filter(item => item.id !== action.payload)
-    }
   case CART_ACTION_TYPES.CLEAR_CART:
     return {
       ...state,
